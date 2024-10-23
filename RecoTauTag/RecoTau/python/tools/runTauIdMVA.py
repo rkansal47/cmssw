@@ -6,6 +6,8 @@ from RecoTauTag.RecoTau.DeepTau_cfi import DeepTau
 from RecoTauTag.RecoTau.DeepTauIdSonicProducer_cfi import DeepTauIdSonicProducer
 from RecoTauTag.RecoTau.tauIdWPsDefs import WORKING_POINTS_v2p1, WORKING_POINTS_v2p5, WORKING_POINTS_PHASEII_v2p5
 
+from RecoTauTag.RecoTau.tauIdWPsDefs import WORKING_POINTS_v2p5_noDA
+
 import os
 import re
 
@@ -17,6 +19,7 @@ class TauIDEmbedder(object):
     ]
     availableDiscriminators = experimentalDiscriminators.copy()
     availableDiscriminators.extend([
+        "deepTau2018v2p5_noDA",
         "mvaIso", "mvaIsoNewDM", "mvaIsoDR0p3", #payloads from GT (2017v2)
         "againstEle", #payloads from GT (2018)
         "newDMPhase2v1", #payloads from phase2 GT
@@ -966,6 +969,37 @@ class TauIDEmbedder(object):
             _rerunMvaIsolationTask.add(self.process.mergedSlimmedElectronsForTauId)
             _rerunMvaIsolationTask.add(_deepTauProducer)
             _rerunMvaIsolationSequence += self.process.mergedSlimmedElectronsForTauId
+            _rerunMvaIsolationSequence += _deepTauProducer
+
+        if "deepTau2018v2p5_noDA" in self.toKeep:
+            if self.debug: print ("Adding DeepTau v2p5 IDs w/o domain adaptation")
+
+            _deepTauName = "deepTau2018v2p5noDA"
+            workingPoints_ = WORKING_POINTS_v2p5_noDA
+
+            file_names = [
+                'core:RecoTauTag/TrainingFiles/data/DeepTauId/deepTau_2018v2p5_noDomainAdaptation_core.pb',
+                'inner:RecoTauTag/TrainingFiles/data/DeepTauId/deepTau_2018v2p5_noDomainAdaptation_inner.pb',
+                'outer:RecoTauTag/TrainingFiles/data/DeepTauId/deepTau_2018v2p5_noDomainAdaptation_outer.pb',
+            ]
+            full_version = self.getDeepTauVersion(file_names[0])
+            setattr(self.process,_deepTauName+self.postfix,DeepTau.clone(
+                Prediscriminants                = noPrediscriminants,
+                taus                            = self.originalTauName,
+                graph_file                      = file_names,
+                year                            = full_version[0],
+                version                         = full_version[1],
+                sub_version                     = full_version[2],
+                disable_dxy_pca                 = True,
+                disable_hcalFraction_workaround = True,
+                disable_CellIndex_workaround    = True
+            ))
+
+            _deepTauProducer = getattr(self.process,_deepTauName+self.postfix)
+
+            self.processDeepProducer(_deepTauName, tauIDSources, workingPoints_)
+
+            _rerunMvaIsolationTask.add(_deepTauProducer)
             _rerunMvaIsolationSequence += _deepTauProducer
 
         if "againstEle2018" in self.toKeep:

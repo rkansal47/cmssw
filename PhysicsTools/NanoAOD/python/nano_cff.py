@@ -249,15 +249,14 @@ def nanoAOD_customizeCommon(process):
     )
 
     nanoAOD_tau_switch = cms.PSet(
-        idsToAdd = cms.vstring(),
+        idsToAdd = cms.vstring("deepTau2018v2p5_noDA"),
         addUParTInfo = cms.bool(True),
         addPNet = cms.bool(True)
     )
     (run2_nanoAOD_106Xv2 | run3_nanoAOD_122).toModify(
-        nanoAOD_tau_switch, idsToAdd = ["deepTau2018v2p5"]
-    ).toModify(
-        process, lambda p : nanoAOD_addTauIds(p, nanoAOD_tau_switch.idsToAdd.value())
+        nanoAOD_tau_switch, idsToAdd = ["deepTau2018v2p5","deepTau2018v2p5_noDA"]
     )
+    process = nanoAOD_addTauIds(process, nanoAOD_tau_switch.idsToAdd.value())
     
     # Don't add Unified Tagger for PUPPI jets for Run 2 (as different PUPPI tune
     # and base jet algorithm) or early Run 3 eras

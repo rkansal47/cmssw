@@ -114,6 +114,12 @@ _deepTauVars2018v2p5 = cms.PSet(
                                             doc="byDeepTau2018v2p5VSjet ID working points (deepTau2018v2p5)"),
 )
 
+_deepTauVars2018v2p5noDA = cms.PSet(
+    rawDeepTau2018v2p5noDAVSe = Var("?isTauIDAvailable('byDeepTau2018v2p5noDAVSeraw')?tauID('byDeepTau2018v2p5noDAVSeraw'):-1", float, doc="byDeepTau2018v2p5VSe raw output discriminator (deepTau2018v2p5 w/o domain adaptation)", precision=10),
+    rawDeepTau2018v2p5noDAVSmu = Var("?isTauIDAvailable('byDeepTau2018v2p5noDAVSmuraw')?tauID('byDeepTau2018v2p5noDAVSmuraw'):-1", float, doc="byDeepTau2018v2p5VSmu raw output discriminator (deepTau2018v2p5 w/o domain adaptation)", precision=10),
+    rawDeepTau2018v2p5noDAVSjet = Var("?isTauIDAvailable('byDeepTau2018v2p5noDAVSjetraw')?tauID('byDeepTau2018v2p5noDAVSjetraw'):-1", float, doc="byDeepTau2018v2p5VSjet raw output discriminator (deepTau2018v2p5 w/o domain adaptation)", precision=10),
+)
+
 _UTagCHS = cms.PSet(
     decayModePNet = Var("?isTauIDAvailable('byUTagCHSDecayMode')?tauID('byUTagCHSDecayMode'):-1", "int16",doc="decay mode of the highest tau score of ParticleNet (CHS Jets)"),
     rawPNetVSe = Var("?isTauIDAvailable('byUTagCHSVSeraw')?tauID('byUTagCHSVSeraw'):-1", float, doc="raw output of ParticleNetVsE discriminator (PNet 2023 - CHS Jets)", precision=10),
@@ -146,6 +152,7 @@ _variablesMiniV2 = cms.PSet(
     _tauVarsBase,
     _deepTauVars2017v2p1,
     _deepTauVars2018v2p5,
+    _deepTauVars2018v2p5noDA,
     _UTagCHS,
     _UTagPUPPI
 )

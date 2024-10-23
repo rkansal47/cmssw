@@ -89,3 +89,9 @@ WORKING_POINTS_PHASEII_v2p5 = {
         "VVTight": 0.9856
     }
 }
+
+WORKING_POINTS_v2p5_noDA = {
+    "e": {},
+    "mu": {},
+    "jet": {}
+}

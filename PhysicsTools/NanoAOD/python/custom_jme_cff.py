@@ -1295,6 +1295,54 @@ def RecomputePuppiWeightsAndMET(proc):
   """
   proc = RecomputePuppiWeights(proc)
   proc = RecomputePuppiMET(proc)
+
+  return proc
+
+def RecomputePuppiWeightsMETAK8(proc):
+  """
+  Recompute Puppi weights and PuppiMET and rebuild slimmedJetsAK8.
+  """
+  runOnMC=True
+  if hasattr(proc,"NANOEDMAODoutput") or hasattr(proc,"NANOAODoutput"):
+    runOnMC = False
+
+  proc = RecomputePuppiWeightsAndMET(proc)
+
+  from RecoBTag.ONNXRuntime.pfParticleNet_cff import _pfParticleNetJetTagsAll as pfParticleNetJetTagsAll
+  from RecoBTag.ONNXRuntime.pfParticleNet_cff import _pfParticleNetMassRegressionOutputs as pfParticleNetMassRegressionOutputs
+  from RecoBTag.ONNXRuntime.pfParticleNet_cff import _pfParticleNetMassCorrelatedJetTagsAll as pfParticleNetMassCorrelatedJetTagsAll
+  from RecoBTag.ONNXRuntime.pfParticleNetFromMiniAODAK8_cff import _pfParticleNetFromMiniAODAK8JetTagsAll as pfParticleNetFromMiniAODAK8JetTagsAll
+  from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8_cff import _pfGlobalParticleTransformerAK8JetTagsAll as pfGlobalParticleTransformerAK8JetTagsAll
+
+  btagDiscriminatorsAK8 = cms.PSet(names = cms.vstring(
+      pfParticleNetMassCorrelatedJetTagsAll+
+      pfGlobalParticleTransformerAK8JetTagsAll+
+      pfParticleNetFromMiniAODAK8JetTagsAll+
+      pfParticleNetJetTagsAll+
+      pfParticleNetMassRegressionOutputs
+    )
+  )
+
+  btagDiscriminatorsAK8Subjets = cms.PSet(names = cms.vstring(
+      'pfDeepFlavourJetTags:probb',
+      'pfDeepFlavourJetTags:probbb',
+      'pfDeepFlavourJetTags:problepb',
+      'pfUnifiedParticleTransformerAK4DiscriminatorsJetTags:BvsAll'
+    )
+  )
+
+  run3_nanoAOD_pre142X.toModify(btagDiscriminatorsAK8Subjets,
+    names = cms.vstring('pfDeepCSVJetTags:probb','pfDeepCSVJetTags:probbb')
+  )
+
+  from PhysicsTools.PatAlgos.tools.puppiJetMETReclusteringFromMiniAOD_cff import setupPuppiAK4AK8METReclustering
+  proc = setupPuppiAK4AK8METReclustering(proc, runOnMC=runOnMC, useExistingWeights=False,
+    reclusterAK4MET=False, # Already setup to recluster AK4 Puppi jets and PuppiMET
+    reclusterAK8=True,
+    btagDiscriminatorsAK8=btagDiscriminatorsAK8,
+    btagDiscriminatorsAK8Subjets=btagDiscriminatorsAK8Subjets
+  )
+
   return proc
 
 #===========================================================================

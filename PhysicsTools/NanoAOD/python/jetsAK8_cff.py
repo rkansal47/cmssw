@@ -219,6 +219,7 @@ def nanoAOD_addDeepInfoAK8(process, addDeepBTag, addDeepBoostedJet, addDeepDoubl
     )
     process.jetCorrFactorsAK8.src="selectedUpdatedPatJetsAK8WithDeepInfo"
     process.updatedJetsAK8.jetSource="selectedUpdatedPatJetsAK8WithDeepInfo"
+    print(_btagDiscriminators)
     return process
 
 nanoAOD_addDeepInfoAK8_switch = cms.PSet(

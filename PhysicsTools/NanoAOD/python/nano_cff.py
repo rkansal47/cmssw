@@ -29,6 +29,7 @@ from PhysicsTools.NanoAOD.fsrPhotons_cff import *
 from PhysicsTools.NanoAOD.softActivity_cff import *
 from PhysicsTools.NanoAOD.l1trig_cff import *
 
+
 nanoMetadata = cms.EDProducer("UniqueStringProducer",
     strings = cms.PSet(
         tag = cms.string("untagged"),
@@ -106,7 +107,7 @@ nanoSequenceFS = cms.Sequence(nanoSequenceCommon + cms.Sequence(nanoTableTaskFS)
 nanoSequenceMC = nanoSequenceFS.copy()
 nanoSequenceMC.insert(nanoSequenceFS.index(nanoSequenceCommon)+1,nanoSequenceOnlyFullSim)
 
-# modifier which adds new tauIDs (currently only deepTauId2017v2p1 is being added)
+# modifier which adds new tauIDs
 import RecoTauTag.RecoTau.tools.runTauIdMVA as tauIdConfig
 def nanoAOD_addTauIds(process, idsToRun=[]):
     if idsToRun: #no-empty list of tauIDs to run
@@ -213,14 +214,11 @@ def nanoAOD_customizeCommon(process):
         nanoAOD_addRobustParTAK4Tag_switch=False,
         nanoAOD_addUnifiedParTAK4Tag_switch=True,
     )
-  
-    # enable rerun of PNet for CHS jets for early run3 eras
-    # (it is rerun for run2 within jet tasks while is not needed for newer
-    # run3 eras as it is present in miniAOD)
+
     (run3_nanoAOD_122 | run3_nanoAOD_124).toModify(
         nanoAOD_addDeepInfoAK4CHS_switch, nanoAOD_addParticleNet_switch = True
     )
-    
+  
     # This function is defined in jetsAK4_Puppi_cff.py
     process = nanoAOD_addDeepInfoAK4(process,
         addParticleNet=nanoAOD_addDeepInfoAK4_switch.nanoAOD_addParticleNet_switch,
@@ -245,6 +243,7 @@ def nanoAOD_customizeCommon(process):
         addDeepDoubleXV2=nanoAOD_addDeepInfoAK8_switch.nanoAOD_addDeepDoubleXV2_switch,
         addParticleNetMassLegacy=nanoAOD_addDeepInfoAK8_switch.nanoAOD_addParticleNetMassLegacy_switch,
         addParticleNet=nanoAOD_addDeepInfoAK8_switch.nanoAOD_addParticleNet_switch,
+        addGlobalParT=nanoAOD_addDeepInfoAK8_switch.nanoAOD_addGlobalParT_switch,
         jecPayload=nanoAOD_addDeepInfoAK8_switch.jecPayload
     )
 
@@ -259,11 +258,17 @@ def nanoAOD_customizeCommon(process):
         process, lambda p : nanoAOD_addTauIds(p, nanoAOD_tau_switch.idsToAdd.value())
     )
     
-    # Don't add Unified Tagger for PUPPI jets for Run 2 (as different PUPPI tune
-    # and base jet algorithm) or early Run 3 eras
+    # Add Unified Tagger for CHS jets (PNet) for Run 2 era,
+    # but don't add Unified Tagger for PUPPI jets (as different PUPPI tune
+    # and base jet algorithm)
     (run3_nanoAOD_122 | run3_nanoAOD_124 | run2_nanoAOD_106Xv2).toModify(
         nanoAOD_tau_switch, addUParTInfo = False
     )
+    # Add Unified Taggers for Run 3 pre 142X (pre v15) era (Unified taggers 
+    # are already added to slimmedTaus in miniAOD for newer eras)
+    # run3_nanoAOD_pre142X.toModify(
+    #     nanoAOD_tau_switch, addPNet = True, addUParTInfo = True
+    # )
     
     # Add Unified Tagger For CHS Jets (PNet 2023)
     nanoAOD_addUTagToTaus(process,
@@ -281,10 +286,15 @@ def nanoAOD_customizeCommon(process):
         idsToAdd = cms.vstring()
     )
     run2_nanoAOD_106Xv2.toModify(
-        nanoAOD_boostedTau_switch, idsToAdd = ["mvaIso", "mvaIsoNewDM", "mvaIsoDR0p3", "againstEle"]
+        nanoAOD_boostedTau_switch, idsToAdd = ["mvaIso", "mvaIsoNewDM", "mvaIsoDR0p3", "againstEle", "boostedDeepTauRunIIv2p0"]
     ).toModify(
         process, lambda p : nanoAOD_addBoostedTauIds(p, nanoAOD_boostedTau_switch.idsToAdd.value())
     )
+    # run3_nanoAOD_pre142X.toModify(
+    #     nanoAOD_boostedTau_switch, idsToAdd = ["boostedDeepTauRunIIv2p0"]
+    # ).toModify(
+    #     process, lambda p : nanoAOD_addBoostedTauIds(p, nanoAOD_boostedTau_switch.idsToAdd.value())
+    # )
 
     # Add lepton time-life info
     from PhysicsTools.NanoAOD.leptonTimeLifeInfo_common_cff import addTimeLifeInfoBase

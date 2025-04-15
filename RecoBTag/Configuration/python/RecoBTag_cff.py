@@ -15,6 +15,7 @@ from RecoBTag.ONNXRuntime.pfParticleNet_cff import *
 from RecoBTag.ONNXRuntime.pfParticleNetAK4_cff import *
 from RecoBTag.ONNXRuntime.pfParticleTransformerAK4_cff import *
 from RecoBTag.ONNXRuntime.pfUnifiedParticleTransformerAK4_cff import *
+from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8_cff import *
 from RecoVertex.AdaptiveVertexFinder.inclusiveVertexing_cff import *
 from RecoBTag.PixelCluster.pixelClusterTagInfos_cfi import *
 
@@ -122,4 +123,3 @@ _pfCTaggingTask_run3 = cms.Task(
 )
 run3_common.toReplaceWith( pfBTaggingTask, _pfBTaggingTask_run3 )
 run3_common.toReplaceWith( pfCTaggingTask, _pfCTaggingTask_run3 )
-

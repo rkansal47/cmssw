@@ -533,7 +533,7 @@ def add_BTV(process,  addAK4=False, addAK8=False, scheme="btvSF"):
             variables=cms.PSet(
                 CommonVars,
                 #HadronCountingVars if runOnMC else cms.PSet(), # only necessary before 106x
-                get_DDX_vars() ,
+                # get_DDX_vars() ,
             ))
 
 
@@ -654,7 +654,7 @@ def addPFCands(process, allPF = False, addAK4=False, addAK8=False):
 # btvNano_addAK4_switch, btvNano_addAK8_switch True, btvNano_addPF_switch  False, TaggerInput = "btvSF"
 
 btvNano_switch = cms.PSet(
-    btvNano_addAK4_switch = cms.untracked.bool(True),
+    btvNano_addAK4_switch = cms.untracked.bool(False),
     btvNano_addAK8_switch = cms.untracked.bool(True),
     btvNano_addallPF_switch = cms.untracked.bool(False),
     TaggerInput = cms.string("btvSF")

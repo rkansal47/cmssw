@@ -653,14 +653,14 @@ def addPFCands(process, allPF = False, addAK4=False, addAK8=False):
 # Default(store SFs PFCands+TaggerInputs) for both AK4 & AK8 jets
 # btvNano_addAK4_switch, btvNano_addAK8_switch True, btvNano_addPF_switch  False, TaggerInput = "btvSF"
 
-btvNano_switch = cms.PSet(
-    btvNano_addAK4_switch = cms.untracked.bool(False),
-    btvNano_addAK8_switch = cms.untracked.bool(True),
-    btvNano_addallPF_switch = cms.untracked.bool(False),
-    TaggerInput = cms.string("btvSF")
-  )
+# btvNano_switch = cms.PSet(
+#     btvNano_addAK4_switch = cms.untracked.bool(False),
+#     btvNano_addAK8_switch = cms.untracked.bool(True),
+#     btvNano_addallPF_switch = cms.untracked.bool(False),
+#     TaggerInput = cms.string("btvSF")
+#   )
 
-def BTVCustomNanoAOD(process):
+def BTVCustomNanoAOD_base(process, btvNano_switch):
     addPFCands(process,btvNano_switch.btvNano_addallPF_switch,btvNano_switch.btvNano_addAK4_switch,btvNano_switch.btvNano_addAK8_switch)
     add_BTV(process, btvNano_switch.btvNano_addAK4_switch,btvNano_switch.btvNano_addAK8_switch,btvNano_switch.TaggerInput)
     process.load("PhysicsTools.NanoAOD.btvMC_cff")
@@ -675,4 +675,50 @@ def BTVCustomNanoAOD(process):
         elif not btvNano_switch.btvNano_addAK4_switch and btvNano_switch.btvNano_addAK8_switch:
             process.nanoSequenceMC+=ak8onlyPFCandsMCSequence
     
+    return process
+
+
+def BTVCustomNanoAOD(process):
+    # Default: store PFCands + tagger inputs/outputs for AK4+AK8 jets
+    BTVCustomNanoAOD_AK4AK8(process)
+    return process
+
+def BTVCustomNanoAOD_AK4(process):
+    btvNano_switch = cms.PSet(
+        btvNano_addAK4_switch = cms.untracked.bool(True),
+        btvNano_addAK8_switch = cms.untracked.bool(False),
+        btvNano_addallPF_switch = cms.untracked.bool(False),
+        TaggerInput = cms.string("btvSF")
+    )
+    BTVCustomNanoAOD_base(process, btvNano_switch)
+    return process
+
+def BTVCustomNanoAOD_AK8(process):
+    btvNano_switch = cms.PSet(
+        btvNano_addAK4_switch = cms.untracked.bool(False),
+        btvNano_addAK8_switch = cms.untracked.bool(True),
+        btvNano_addallPF_switch = cms.untracked.bool(False),
+        TaggerInput = cms.string("btvSF")
+    )
+    BTVCustomNanoAOD_base(process, btvNano_switch)
+    return process
+
+def BTVCustomNanoAOD_AK4AK8(process):
+    btvNano_switch = cms.PSet(
+        btvNano_addAK4_switch = cms.untracked.bool(True),
+        btvNano_addAK8_switch = cms.untracked.bool(True),
+        btvNano_addallPF_switch = cms.untracked.bool(False),
+        TaggerInput = cms.string("btvSF")
+    )
+    BTVCustomNanoAOD_base(process, btvNano_switch)
+    return process
+
+def BTVCustomNanoAOD_allPF(process):
+    btvNano_switch = cms.PSet(
+        btvNano_addAK4_switch = cms.untracked.bool(True),
+        btvNano_addAK8_switch = cms.untracked.bool(True),
+        btvNano_addallPF_switch = cms.untracked.bool(True),
+        TaggerInput = cms.string("btvSF")
+    )
+    BTVCustomNanoAOD_base(process, btvNano_switch)
     return process

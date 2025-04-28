@@ -89,3 +89,32 @@ WORKING_POINTS_PHASEII_v2p5 = {
         "VVTight": 0.9856
     }
 }
+
+WORKING_POINTS_v2p5_noDA = {
+    "e": {
+        "VVVLoose": 0.1934,
+        "VVLoose": 0.3491,
+        "VLoose": 0.5305,
+        "Loose": 0.8037,
+        "Medium": 0.9333,
+        "Tight": 0.9867,
+        "VTight": 0.9957,
+        "VVTight": 0.9984,
+    },
+    "mu": {
+        "VLoose": 0.3931,
+        "Loose": 0.6151,
+        "Medium": 0.8281,
+        "Tight": 0.9349,
+    },
+    "jet": {
+        "VVVLoose": 0.4260,
+        "VVLoose": 0.6123,
+        "VLoose": 0.7721,
+        "Loose": 0.9054,
+        "Medium": 0.9520,
+        "Tight": 0.9725,
+        "VTight": 0.9830,
+        "VVTight": 0.9893,
+    }
+}

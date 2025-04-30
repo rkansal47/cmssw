@@ -41,8 +41,8 @@ supportedBtagInfos = [
     # DeepFlavour tag infos
   , 'pfDeepFlavourTagInfos'
   , 'pfNegativeDeepFlavourTagInfos'
-    # ParticleTransformerAK8 tag infos
-  , 'pfParticleTransformerAK8TagInfos'
+    # GlobalParticleTransformerAK8V02 tag infos
+  , 'pfGlobalParticleTransformerAK8V02TagInfos'
     # ParticleTransformerAK4 tag infos
   , 'pfParticleTransformerAK4TagInfos'
     # UnifiedParticleTransformerAK4 tag infos
@@ -348,14 +348,14 @@ for disc in _pfHiggsInteractionNetTagsProbs:
 # -----------------------------------
 
 # -----------------------------------
-# setup ParticleTransformer AK8
-from RecoBTag.ONNXRuntime.pfParticleTransformerAK8_cff import _pfParticleTransformerAK8MDJetTagsProbs, _pfParticleTransformerAK8MDJetTagsMetaDiscrs
+# setup GlobalParticleTransformer AK8 V02
+from RecoBTag.ONNXRuntime.pfParticleTransformerAK8_cff import _pfGlobalParticleTransformerAK8V02JetTagsProbs, _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs
 # update supportedBtagDiscr
-for disc in _pfParticleTransformerAK8MDJetTagsProbs + _pfParticleTransformerAK8MDJetTagsMetaDiscrs:
-    supportedBtagDiscr[disc] = [["pfParticleTransformerAK8TagInfos"]]
+for disc in _pfGlobalParticleTransformerAK8V02JetTagsProbs + _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs:
+    supportedBtagDiscr[disc] = [["pfGlobalParticleTransformerAK8V02TagInfos"]]
 # update supportedMetaDiscr
-for disc in _pfParticleTransformerAK8MDJetTagsMetaDiscrs:
-    supportedMetaDiscr[disc] = _pfParticleTransformerAK8MDJetTagsProbs
+for disc in _pfGlobalParticleTransformerAK8MDJetTagsMetaDiscrs:
+    supportedMetaDiscr[disc] = _pfGlobalParticleTransformerAK8V02JetTagsProbs
 # -----------------------------------
 
 # -----------------------------------

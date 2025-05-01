@@ -30,7 +30,7 @@ pfGlobalParticleTransformerAK8V02JetTags = boostedJetONNXJetTagsProducer.clone(
         'probQCDbb', 'probQCDcc', 'probQCDb', 'probQCDc', 'probQCDothers', 
         'resonanceMassCorr', 'visiableMassCorr',
     ],
-    debugMode = True,
+    debugMode = False,
 )
 
 from CommonTools.PileupAlgos.Puppi_cff import puppi

@@ -354,7 +354,7 @@ from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8V02_cff import _pfGlobal
 for disc in _pfGlobalParticleTransformerAK8V02JetTagsProbs + _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs:
     supportedBtagDiscr[disc] = [["pfGlobalParticleTransformerAK8V02TagInfos"]]
 # update supportedMetaDiscr
-for disc in _pfGlobalParticleTransformerAK8MDJetTagsMetaDiscrs:
+for disc in _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs:
     supportedMetaDiscr[disc] = _pfGlobalParticleTransformerAK8V02JetTagsProbs
 # -----------------------------------
 

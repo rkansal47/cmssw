@@ -1,10 +1,14 @@
 import FWCore.ParameterSet.Config as cms
-from RecoBTag.FeatureTools.pfGlobalParticleTransformerAK8TagInfos_cfi import pfGlobalParticleTransformerAK8TagInfos as _pfGlobalParticleTransformerAK8TagInfos
+
+from RecoBTag.FeatureTools.pfGlobalParticleTransformerAK8TagInfos_cfi import pfGlobalParticleTransformerAK8TagInfos as _pfGlobalParticleTransformerAK8V02TagInfos
 from RecoBTag.ONNXRuntime.boostedJetONNXJetTagsProducer_cfi import boostedJetONNXJetTagsProducer
-from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8 import pfGlobalParticleTransformerAK8TagInfos
+
+pfGlobalParticleTransformerAK8V02TagInfos = _pfGlobalParticleTransformerAK8V02TagInfos.clone(
+    use_puppiP4 = False
+)
 
 pfGlobalParticleTransformerAK8V02JetTags = boostedJetONNXJetTagsProducer.clone(
-    src = 'pfGlobalParticleTransformerAK8TagInfos',
+    src = 'pfGlobalParticleTransformerAK8V02TagInfos',
     preprocess_json = 'RecoBTag/ONNXRuntime/data/GlobalParticleTransformerAK8/PUPPI/V02/preprocess.json',
     model_path = 'RecoBTag/ONNXRuntime/data/GlobalParticleTransformerAK8/PUPPI/V02/model.onnx',
     flav_names = [
@@ -33,15 +37,14 @@ from CommonTools.PileupAlgos.Puppi_cff import puppi
 from CommonTools.RecoAlgos.primaryVertexAssociation_cfi import primaryVertexAssociation
 
 # This task is not used, useful only if we run it from RECO jets (RECO/AOD)
-pfParticleTransformerAK8V02Task = cms.Task(puppi, primaryVertexAssociation, pfGlobalParticleTransformerAK8TagInfos,
-                             pfGlobalParticleTransformerAK8V02JetTags)
+pfGlobalParticleTransformerAK8V02Task = cms.Task(puppi, primaryVertexAssociation, pfGlobalParticleTransformerAK8V02TagInfos, pfGlobalParticleTransformerAK8V02JetTags)
 
 # declare all the discriminators
 
-# mass-decorrelated: probs
-_pfGlobalParticleTransformerAK8V02JetTagsProbs = ['pfGlobalParticleTransformerAK8V02JetTags:' + flav_name
-                              for flav_name in pfGlobalParticleTransformerAK8V02JetTags.flav_names]
-# mass-decorrelated: meta-taggers
+# probs
+_pfGlobalParticleTransformerAK8V02JetTagsProbs = ['pfGlobalParticleTransformerAK8V02JetTags:' + flav_name for flav_name in pfGlobalParticleTransformerAK8V02JetTags.flav_names]
+
+# meta-taggers
 _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs = []
 
 _pfGlobalParticleTransformerAK8V02JetTagsAll = _pfGlobalParticleTransformerAK8V02JetTagsProbs + _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs

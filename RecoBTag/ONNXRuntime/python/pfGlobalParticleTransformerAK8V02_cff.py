@@ -1,6 +1,7 @@
 import FWCore.ParameterSet.Config as cms
 from RecoBTag.FeatureTools.pfGlobalParticleTransformerAK8TagInfos_cfi import pfGlobalParticleTransformerAK8TagInfos as _pfGlobalParticleTransformerAK8TagInfos
 from RecoBTag.ONNXRuntime.boostedJetONNXJetTagsProducer_cfi import boostedJetONNXJetTagsProducer
+from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8 import pfGlobalParticleTransformerAK8TagInfos
 
 pfGlobalParticleTransformerAK8V02JetTags = boostedJetONNXJetTagsProducer.clone(
     src = 'pfGlobalParticleTransformerAK8TagInfos',

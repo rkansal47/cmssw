@@ -367,31 +367,31 @@ fatJetTable = simplePATJetFlatTableProducer.clone(
         particleNetLegacy_QCDcc = Var("bDiscriminator('pfMassDecorrelatedParticleNetJetTags:probQCDcc')",float,doc="Mass-decorrelated ParticleNet Legacy Run-2 tagger raw QCDcc score",precision=10),
         particleNetLegacy_QCDc = Var("bDiscriminator('pfMassDecorrelatedParticleNetJetTags:probQCDc')",float,doc="Mass-decorrelated ParticleNet Legacy Run-2 tagger raw QCDc score",precision=10),
         particleNetLegacy_QCDothers = Var("bDiscriminator('pfMassDecorrelatedParticleNetJetTags:probQCDothers')",float,doc="Mass-decorrelated ParticleNet Legacy Run-2 tagger raw QCDothers score",precision=10),
-        globalParT_Xbb = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHbb')",float,doc="Global ParT X->bb",precision=10),
-        globalParT_Xcc = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHcc')",float,doc="Global ParT X->cc",precision=10),
-        globalParT_Xcs = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHcs')",float,doc="Global ParT X->cs",precision=10),
-        globalParT_Xqq = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHqq')",float,doc="Global ParT X->qq",precision=10),
-        globalParT_Xgg = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHgg')",float,doc="Global ParT X->gg",precision=10),
-        globalParT_Xtauhtaue = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHtauhtaue')",float,doc="Global ParT X->tauhtaue score",precision=10),
-        globalParT_Xtauhtaum = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHtauhtaum')",float,doc="Global ParT X->tauhtauh score",precision=10),
-        globalParT_Xtauhtauh = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHtauhtauh')",float,doc="Global ParT X->tauhtaum score",precision=10),
-        globalParT_TopbW = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWcs')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWqq')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWc')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWs')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWq')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWev')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWmv')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWtauev')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWtaumv')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWtauhv')",float,doc="Global ParT Top->bW score",precision=10),
-        globalParT_TopW = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopWcs')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopWqq')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopWev')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopWmv')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopWtauev')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopWtaumv')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopWtauhv')",float,doc="Global ParT Top->W score",precision=10),
-        globalParT_TopbWqq = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWqq')",float,doc="Global ParT Top->bWqq score",precision=10),
-        globalParT_TopbWq = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWq')",float,doc="Global ParT Top->bWq score",precision=10),
-	globalParT_TopbWev = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWev')",float,doc="Global ParT Top->bWev score",precision=10),
-	globalParT_TopbWmv = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWmv')",float,doc="Global ParT Top->bWmv score",precision=10),
-        globalParT_TopbWtauhv = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probTopbWtauhv')",float,doc="Global ParT Top->bWtauhv score",precision=10),
-        globalParT_QCD2HF = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDbb')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDcc')",float,doc="Global ParT QCD 2 HF (b/c) score",precision=10),
-        globalParT_QCD1HF = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDb')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDc')",float,doc="Global ParT QCD 1 HF (b/c) score",precision=10),
-        globalParT_QCD0HF = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDothers')",float,doc="Global ParT QCD 0 HF (b/c) score",precision=10),
-        globalParT_XbbVsQCD = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probHbb')/(bDiscriminator('pfParticleTransformerAK8MDJetTags:probHbb')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDbb')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDcc')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDb')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDc')+bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDothers'))",float,doc="Global ParT X->bb vs. QCD score: Xbb/(Xbb+QCD)",precision=10),
-        #globalParT_QCDbb = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDbb')",float,doc="Global ParT QCD bb score",precision=10),
-        #globalParT_QCDcc = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDcc')",float,doc="Global ParT QCD cc score",precision=10),
-        #globalParT_QCDb = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDb')",float,doc="Global ParT QCD b score",precision=10),
-        #globalParT_QCDc = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:probQCDc')",float,doc="Global ParT QCD c score",precision=10),
-        globalParT_massRes = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:resonanceMassCorr')",float,doc="Global ParT resonance mass correction",precision=10),
-        globalParT_massVis = Var("bDiscriminator('pfParticleTransformerAK8MDJetTags:visiableMassCorr')",float,doc="Global ParT visible mass correction",precision=10),
+        globalParT2_Xbb = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHbb')",float,doc="Mass-decorrelated GlobalParT-2 X->bb",precision=10),
+        globalParT2_Xcc = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHcc')",float,doc="Mass-decorrelated GlobalParT-2 X->cc",precision=10),
+        globalParT2_Xcs = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHcs')",float,doc="Mass-decorrelated GlobalParT-2 X->cs",precision=10),
+        globalParT2_Xqq = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHqq')",float,doc="Mass-decorrelated GlobalParT-2 X->qq",precision=10),
+        globalParT2_Xgg = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHgg')",float,doc="Mass-decorrelated GlobalParT-2 X->gg",precision=10),
+        globalParT2_Xtauhtaue = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHtauhtaue')",float,doc="Mass-decorrelated GlobalParT-2 X->tauhtaue score",precision=10),
+        globalParT2_Xtauhtaum = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHtauhtaum')",float,doc="Mass-decorrelated GlobalParT-2 X->tauhtauh score",precision=10),
+        globalParT2_Xtauhtauh = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHtauhtauh')",float,doc="Mass-decorrelated GlobalParT-2 X->tauhtaum score",precision=10),
+        globalParT2_TopbW = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWcs')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWqq')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWc')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWs')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWq')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWev')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWmv')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWtauev')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWtaumv')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWtauhv')",float,doc="Mass-decorrelated GlobalParT-2 Top->bW score",precision=10),
+        globalParT2_TopW = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopWcs')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopWqq')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopWev')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopWmv')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopWtauev')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopWtaumv')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopWtauhv')",float,doc="Mass-decorrelated GlobalParT-2 Top->W score",precision=10),
+        globalParT2_TopbWqq = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWqq')",float,doc="Mass-decorrelated GlobalParT-2 Top->bWqq score",precision=10),
+        globalParT2_TopbWq = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWq')",float,doc="Mass-decorrelated GlobalParT-2 Top->bWq score",precision=10),
+        globalParT2_TopbWev = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWev')",float,doc="Mass-decorrelated GlobalParT-2 Top->bWev score",precision=10),
+        globalParT2_TopbWmv = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWmv')",float,doc="Mass-decorrelated GlobalParT-2 Top->bWmv score",precision=10),
+        globalParT2_TopbWtauhv = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probTopbWtauhv')",float,doc="Mass-decorrelated GlobalParT-2 Top->bWtauhv score",precision=10),
+        globalParT2_QCD2HF = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDbb')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDcc')",float,doc="Mass-decorrelated GlobalParT-2 QCD 2 HF (b/c) score",precision=10),
+        globalParT2_QCD1HF = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDb')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDc')",float,doc="Mass-decorrelated GlobalParT-2 QCD 1 HF (b/c) score",precision=10),
+        globalParT2_QCD0HF = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDothers')",float,doc="Mass-decorrelated GlobalParT-2 QCD 0 HF (b/c) score",precision=10),
+        globalParT2_XbbVsQCD = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHbb')/(bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probHbb')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDbb')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDcc')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDb')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDc')+bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDothers'))",float,doc="Mass-decorrelated GlobalParT-2 X->bb vs. QCD score: Xbb/(Xbb+QCD)",precision=10),
+        # globalParT2_QCDbb = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDbb')",float,doc="Mass-decorrelated GlobalParT-2 QCD bb score",precision=10),
+        # globalParT2_QCDcc = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDcc')",float,doc="Mass-decorrelated GlobalParT-2 QCD cc score",precision=10),
+        # globalParT2_QCDb = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDb')",float,doc="Mass-decorrelated GlobalParT-2 QCD b score",precision=10),
+        # globalParT2_QCDc = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:probQCDc')",float,doc="Mass-decorrelated GlobalParT-2 QCD c score",precision=10),
+        globalParT2_massRes = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:resonanceMassCorr')",float,doc="Mass-decorrelated GlobalParT-2 resonance mass correction",precision=10),
+        globalParT2_massVis = Var("bDiscriminator('pfGlobalParticleTransformerAK8V02JetTags:visiableMassCorr')",float,doc="Mass-decorrelated GlobalParT-2 visible mass correction",precision=10),
         subJetIdx1 = Var("?nSubjetCollections()>0 && subjets('SoftDropPuppi').size()>0?subjets('SoftDropPuppi')[0].key():-1", "int16",
             doc="index of first subjet"),
         subJetIdx2 = Var("?nSubjetCollections()>0 && subjets('SoftDropPuppi').size()>1?subjets('SoftDropPuppi')[1].key():-1", "int16",
@@ -479,15 +479,14 @@ def nanoAOD_addDeepInfoAK8(process, addDeepBTag, addDeepBoostedJet, addDeepDoubl
         print("Updating process to run GlobalParT")
         from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8_cff import _pfGlobalParticleTransformerAK8JetTagsAll as pfGlobalParticleTransformerAK8JetTagsAll
         _btagDiscriminators += pfGlobalParticleTransformerAK8JetTagsAll
+        from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8V02_cff import _pfGlobalParticleTransformerAK8V02JetTagsAll as pfGlobalParticleTransformerAK8V02JetTagsAll
+        _btagDiscriminators += pfGlobalParticleTransformerAK8V02JetTagsAll
     if addParticleNet:
         print("Updating process to run ParticleNet joint classification and mass regression")
         from RecoBTag.ONNXRuntime.pfParticleNetFromMiniAODAK8_cff import _pfParticleNetFromMiniAODAK8JetTagsAll as pfParticleNetFromMiniAODAK8JetTagsAll
         _btagDiscriminators += pfParticleNetFromMiniAODAK8JetTagsAll
     if addParticleNetMassLegacy:
         print("Updating process to run ParticleNet separate classification and mass regression")
-        from RecoBTag.ONNXRuntime.pfParticleTransformerAK8_cff import _pfParticleTransformerAK8MDJetTagsProbs, _pfParticleTransformerAK8MDJetTagsMetaDiscrs
-        _btagDiscriminators += _pfParticleTransformerAK8MDJetTagsProbs
-        _btagDiscriminators += _pfParticleTransformerAK8MDJetTagsMetaDiscrs
         from RecoBTag.ONNXRuntime.pfParticleNet_cff import _pfMassDecorrelatedParticleNetJetTagsProbs
         _btagDiscriminators += _pfMassDecorrelatedParticleNetJetTagsProbs
         from RecoBTag.ONNXRuntime.pfParticleNet_cff import _pfParticleNetMassRegressionOutputs

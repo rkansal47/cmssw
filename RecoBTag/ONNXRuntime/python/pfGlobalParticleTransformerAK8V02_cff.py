@@ -5,7 +5,7 @@ from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8 import pfGlobalParticle
 
 pfGlobalParticleTransformerAK8V02JetTags = boostedJetONNXJetTagsProducer.clone(
     src = 'pfGlobalParticleTransformerAK8TagInfos',
-    preprocess_json = 'RecoBTag/ONNXRuntime/data/GlobalParticleTransformerAK8/PUPPI/V02/preprocess_corr.json',
+    preprocess_json = 'RecoBTag/ONNXRuntime/data/GlobalParticleTransformerAK8/PUPPI/V02/preprocess.json',
     model_path = 'RecoBTag/ONNXRuntime/data/GlobalParticleTransformerAK8/PUPPI/V02/model.onnx',
     flav_names = [
         'probTopbWcs', 'probTopbWqq', 'probTopbWc', 'probTopbWs', 'probTopbWq', 'probTopbWev', 'probTopbWmv', 'probTopbWtauev', 'probTopbWtaumv', 'probTopbWtauhv', 

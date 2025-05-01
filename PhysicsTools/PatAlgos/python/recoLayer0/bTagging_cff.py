@@ -349,7 +349,7 @@ for disc in _pfHiggsInteractionNetTagsProbs:
 
 # -----------------------------------
 # setup GlobalParticleTransformer AK8 V02
-from RecoBTag.ONNXRuntime.pfParticleTransformerAK8_cff import _pfGlobalParticleTransformerAK8V02JetTagsProbs, _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs
+from RecoBTag.ONNXRuntime.pfGlobalParticleTransformerAK8V02_cff import _pfGlobalParticleTransformerAK8V02JetTagsProbs, _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs
 # update supportedBtagDiscr
 for disc in _pfGlobalParticleTransformerAK8V02JetTagsProbs + _pfGlobalParticleTransformerAK8V02JetTagsMetaDiscrs:
     supportedBtagDiscr[disc] = [["pfGlobalParticleTransformerAK8V02TagInfos"]]

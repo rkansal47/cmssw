@@ -504,9 +504,8 @@ def nanoAOD_addDeepInfoAK8(process, addDeepBTag, addDeepBoostedJet, addDeepDoubl
             'pfMassIndependentDeepDoubleCvLV2JetTags:probHcc',
             'pfMassIndependentDeepDoubleCvBV2JetTags:probHcc'
             ]
-    #print("btag ",_btagDiscriminators, " add ", addParticleNet)
     if len(_btagDiscriminators)==0: return process
-    #print("Will recalculate the following discriminators on AK8 jets: "+", ".join(_btagDiscriminators))
+    print("Will recalculate the following discriminators on AK8 jets: "+", ".join(_btagDiscriminators))
     updateJetCollection(
        process,
        jetSource = cms.InputTag('slimmedJetsAK8'),

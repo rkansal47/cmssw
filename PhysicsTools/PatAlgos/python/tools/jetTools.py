@@ -798,7 +798,7 @@ def setupBTagging(process, jetSource, pfCandidates, explicitJTA, pvSource, svSou
                                       ),
                                     process, task)
 
-            if btagInfo == 'pfParticleNetTagInfos' or btagInfo == 'pfGlobalParticleTransformerAK8TagInfos':
+            if btagInfo in ['pfParticleNetTagInfos', 'pfGlobalParticleTransformerAK8TagInfos', 'pfGlobalParticleTransformerAK8V02TagInfos']:
                 if pfCandidates.value() == 'packedPFCandidates':
                     # case 1: running over jets whose daughters are PackedCandidates (only via updateJetCollection for now)
                     puppi_value_map = setupPuppiForPackedPF(process)[0]

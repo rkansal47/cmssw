@@ -377,10 +377,10 @@ for disc in _pfNegativeParticleTransformerAK4JetTagsProbs:
 
 # -----------------------------------
 # setup Negative ParticleTransformer AK4
-from RecoBTag.ONNXRuntime.pfUnifiedParticleTransformerAK4_cff import _pfNegativeUnifiedParticleTransformerAK4JetTagsProbs
-# update supportedBtagDiscr
-for disc in _pfNegativeUnifiedParticleTransformerAK4JetTagsProbs:
-    supportedBtagDiscr[disc] = [["pfNegativeUnifiedParticleTransformerAK4TagInfos"]]
+# from RecoBTag.ONNXRuntime.pfUnifiedParticleTransformerAK4_cff import _pfNegativeUnifiedParticleTransformerAK4JetTagsProbs
+# # update supportedBtagDiscr
+# for disc in _pfNegativeUnifiedParticleTransformerAK4JetTagsProbs:
+#     supportedBtagDiscr[disc] = [["pfNegativeUnifiedParticleTransformerAK4TagInfos"]]
 # -----------------------------------
 
 # -----------------------------------

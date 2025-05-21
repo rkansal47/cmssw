@@ -4,7 +4,9 @@ from RecoTauTag.RecoTau.TauDiscriminatorTools import noPrediscriminants
 from RecoTauTag.RecoTau.PATTauDiscriminationByMVAIsolationRun2_cff import patDiscriminationByIsolationMVArun2v1raw, patDiscriminationByIsolationMVArun2v1
 from RecoTauTag.RecoTau.DeepTau_cfi import DeepTau
 from RecoTauTag.RecoTau.DeepTauIdSonicProducer_cfi import DeepTauIdSonicProducer
-from RecoTauTag.RecoTau.tauIdWPsDefs import WORKING_POINTS_v2p1, WORKING_POINTS_v2p5, WORKING_POINTS_PHASEII_v2p5
+from RecoTauTag.RecoTau.tauIdWPsDefs import WORKING_POINTS_v2p1, WORKING_POINTS_v2p5, WORKING_POINTS_PHASEII_v2p5, WORKING_POINTS_BOOSTED_v2p0
+
+from RecoTauTag.RecoTau.tauIdWPsDefs import WORKING_POINTS_v2p5_noDA
 
 import os
 import re
@@ -17,11 +19,12 @@ class TauIDEmbedder(object):
     ]
     availableDiscriminators = experimentalDiscriminators.copy()
     availableDiscriminators.extend([
+        "deepTau2018v2p5_noDA",
         "mvaIso", "mvaIsoNewDM", "mvaIsoDR0p3", #payloads from GT (2017v2)
         "againstEle", #payloads from GT (2018)
         "newDMPhase2v1", #payloads from phase2 GT
         "againstElePhase2v1", #payloads from phase2 GT
-        "deepTau2017v2", "deepTau2017v2p1", "deepTau2018v2p5", "deepTau2026v2p5"
+        "deepTau2017v2", "deepTau2017v2p1", "deepTau2018v2p5", "boostedDeepTauRunIIv2p0", "deepTau2026v2p5"
     ])
 
     def __init__(self, process, debug = False,
@@ -930,6 +933,37 @@ class TauIDEmbedder(object):
             _rerunMvaIsolationTask.add(_deepTauProducer)
             _rerunMvaIsolationSequence += _deepTauProducer
 
+        if "boostedDeepTauRunIIv2p0" in self.toKeep:
+            if self.debug: print ("Adding BoostedDeepTau v2p0 IDs for boostedTaus")
+
+            _deepTauName = "boostedDeepTau20161718v2p0"
+            workingPoints_ = WORKING_POINTS_BOOSTED_v2p0
+
+            file_names = [
+                'core:RecoTauTag/TrainingFiles/data/BoostedDeepTauId/boosteddeepTau_RunIIv2p0_core.pb',
+                'inner:RecoTauTag/TrainingFiles/data/BoostedDeepTauId/boosteddeepTau_RunIIv2p0_inner.pb',
+                'outer:RecoTauTag/TrainingFiles/data/BoostedDeepTauId/boosteddeepTau_RunIIv2p0_outer.pb',
+            ]
+            full_version = self.getDeepTauVersion(file_names[0])
+            setattr(self.process,_deepTauName+self.postfix,DeepTau.clone(
+                Prediscriminants                = noPrediscriminants,
+                taus                            = self.originalTauName,
+                graph_file                      = file_names,
+                year                            = full_version[0],
+                version                         = full_version[1],
+                sub_version                     = full_version[2],
+                disable_dxy_pca                 = True,
+                disable_hcalFraction_workaround = True,
+                save_inputs                     = False,
+                disable_CellIndex_workaround    = True
+            ))
+
+            self.processDeepProducer(_deepTauName, tauIDSources, workingPoints_)
+
+            _deepTauProducer = getattr(self.process,_deepTauName+self.postfix)
+            _rerunMvaIsolationTask.add(_deepTauProducer)
+            _rerunMvaIsolationSequence += _deepTauProducer
+
         if "deepTau2026v2p5" in self.toKeep:
             if self.debug: print ("Adding Phase2 DeepTau v2p5 IDs")
 
@@ -966,6 +1000,37 @@ class TauIDEmbedder(object):
             _rerunMvaIsolationTask.add(self.process.mergedSlimmedElectronsForTauId)
             _rerunMvaIsolationTask.add(_deepTauProducer)
             _rerunMvaIsolationSequence += self.process.mergedSlimmedElectronsForTauId
+            _rerunMvaIsolationSequence += _deepTauProducer
+
+        if "deepTau2018v2p5_noDA" in self.toKeep:
+            if self.debug: print ("Adding DeepTau v2p5 IDs w/o domain adaptation")
+
+            _deepTauName = "deepTau2018v2p5noDA"
+            workingPoints_ = WORKING_POINTS_v2p5_noDA
+
+            file_names = [
+                'core:RecoTauTag/TrainingFiles/data/DeepTauId/deepTau_2018v2p5_noDomainAdaptation_core.pb',
+                'inner:RecoTauTag/TrainingFiles/data/DeepTauId/deepTau_2018v2p5_noDomainAdaptation_inner.pb',
+                'outer:RecoTauTag/TrainingFiles/data/DeepTauId/deepTau_2018v2p5_noDomainAdaptation_outer.pb',
+            ]
+            full_version = self.getDeepTauVersion(file_names[0])
+            setattr(self.process,_deepTauName+self.postfix,DeepTau.clone(
+                Prediscriminants                = noPrediscriminants,
+                taus                            = self.originalTauName,
+                graph_file                      = file_names,
+                year                            = full_version[0],
+                version                         = full_version[1],
+                sub_version                     = full_version[2],
+                disable_dxy_pca                 = True,
+                disable_hcalFraction_workaround = True,
+                disable_CellIndex_workaround    = True
+            ))
+
+            _deepTauProducer = getattr(self.process,_deepTauName+self.postfix)
+
+            self.processDeepProducer(_deepTauName, tauIDSources, workingPoints_)
+
+            _rerunMvaIsolationTask.add(_deepTauProducer)
             _rerunMvaIsolationSequence += _deepTauProducer
 
         if "againstEle2018" in self.toKeep:
@@ -1314,11 +1379,12 @@ class TauIDEmbedder(object):
         """returns the DeepTau year, version, subversion. File name should contain a version label with data takig year \
         (2011-2, 2015-8), version number (vX) and subversion (pX), e.g. 2017v0p6, in general the following format: \
         {year}v{version}p{subversion}"""
-        version_search = re.search('(20[1,2][125678])v([0-9]+)(p[0-9]+|)[\._]', file_name)
+        version_search = re.search('(20[1,2][125678]|RunII)v([0-9]+)(p[0-9]+|)[\\._]', file_name)
         if not version_search:
             raise RuntimeError('File "{}" has an invalid name pattern, should be in the format "{year}v{version}p{subversion}". \
                                 Unable to extract version number.'.format(file_name))
         year = version_search.group(1)
+        if year == 'RunII': year = 20161718
         version = version_search.group(2)
         subversion = version_search.group(3)
         if len(subversion) > 0:

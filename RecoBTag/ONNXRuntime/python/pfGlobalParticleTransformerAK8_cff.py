@@ -12,7 +12,7 @@ pfGlobalParticleTransformerAK8JetTags = boostedJetONNXJetTagsProducer.clone(
     preprocess_json = 'RecoBTag/ONNXRuntime/data/GlobalParticleTransformerAK8/PUPPI/V03/preprocess.json',
     model_path = 'RecoBTag/ONNXRuntime/data/GlobalParticleTransformerAK8/PUPPI/V03/model.onnx',
     flav_names = [
-        'probXbb', 'probXcc', 'probXcs', 'probXqq', 'probXtauhtaue', 'probXtauhtaum', 'probXtauhtauh', 'probXWW4q', 'probXWW3q', 'probXWWqqev', 'probXWWqqmv', 'probTopbWqq', 'probTopbWq', 'probTopbWev', 'probTopbWmv', 'probTopbWtauhv', 'probQCD', 'probQCDbb', 'probQCDcc', 'probQCDb', 'probQCDc', 'probQCDothers', 'massCorrX2p', 'massCorrGeneric', 'probWithMassTopvsQCD', 'probWithMassWvsQCD', 'probWithMassZvsQCD'
+        'probXbb', 'probXcc', 'probXcs', 'probXqq', 'probXtauhtaue', 'probXtauhtaum', 'probXtauhtauh', 'probXWW4q', 'probXWW3q', 'probXWWqqev', 'probXWWqqmv', 'probTopbWqq', 'probTopbWq', 'probTopbWev', 'probTopbWmv', 'probTopbWtauhv', 'probQCD', 'massCorrX2p', 'massCorrGeneric', 'probWithMassTopvsQCD', 'probWithMassWvsQCD', 'probWithMassZvsQCD'
     ] + ['hidNeuron' + str(i).zfill(3) for i in range(256)],
     debugMode = False,
 )

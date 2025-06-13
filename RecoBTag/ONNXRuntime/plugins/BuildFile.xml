@@ -5,6 +5,7 @@
   <use name="DataFormats/BTauReco"/>
   <use name="DataFormats/PatCandidates"/>
   <use name="DataFormats/NanoAOD"/>
+  <use name="PhysicsTools/ONNXRuntime"/>
   <use name="RecoBTag/FeatureTools"/>
   <use name="RecoBTag/ONNXRuntime"/>
   <use name="HeterogeneousCore/SonicTriton"/>
